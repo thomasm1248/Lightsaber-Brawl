@@ -705,6 +705,8 @@ Soldier = function(x, y) {
         x: x,
         y: y
     };
+    
+    this.dir = Math.random() * 360;
 
     this.vel = {
         x: 0,
@@ -734,7 +736,11 @@ Soldier = function(x, y) {
 Soldier.prototype.draw = function() {
     ctx.save();
     ctx.translate(this.pos.x, this.pos.y);
-
+    ctx.rotate(this.dir * d2r);
+    
+    ctx.fillStyle = "#101010";
+    ctx.fillRect(-17, 9, 50, 10);
+    
     ctx.fillStyle = "#dddddd";
     ctx.strokeStyle = "#555555";
     ctx.lineWidth = 3;
@@ -742,7 +748,7 @@ Soldier.prototype.draw = function() {
     ctx.arc(0, 0, this.rad, 0, 360 * Math.PI);
     ctx.fill();
     ctx.stroke();
-
+    
     ctx.restore();
 }
 
