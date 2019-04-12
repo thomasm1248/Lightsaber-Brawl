@@ -705,6 +705,9 @@ Soldier = function(x, y) {
         x: x,
         y: y
     };
+    
+    this.dir = Math.random() * 360;
+    this.rot = 0;
 
     this.vel = {
         x: 0,
@@ -734,7 +737,11 @@ Soldier = function(x, y) {
 Soldier.prototype.draw = function() {
     ctx.save();
     ctx.translate(this.pos.x, this.pos.y);
-
+    ctx.rotate(this.dir * d2r);
+    
+    ctx.fillStyle = "#101010";
+    ctx.fillRect(-17, 9, 50, 10);
+    
     ctx.fillStyle = "#dddddd";
     ctx.strokeStyle = "#555555";
     ctx.lineWidth = 3;
@@ -742,7 +749,7 @@ Soldier.prototype.draw = function() {
     ctx.arc(0, 0, this.rad, 0, 360 * Math.PI);
     ctx.fill();
     ctx.stroke();
-
+    
     ctx.restore();
 }
 
@@ -870,11 +877,18 @@ Soldier.prototype.kill = function() {
 Soldier.prototype.shoot = function() {
     if(Math.random() <= this.shootFreq) {
         model.lasers.push(new Laser(
-            this.pos.x,
-            this.pos.y,
-            Math.random() * 360
+            this.pos.x + Math.cos((this.dir + 28) * d2r) * 30,
+            this.pos.y + Math.sin((this.dir + 28) * d2r) * 30,
+            this.dir
         ));
     }
+}
+
+Soldier.prototype.rotate = function() {
+    this.rot += Math.random() * 4 - 2;
+    this.rot *= 0.95;
+    this.dir += this.rot;
+    this.dir %= 360;
 }
 
 Soldier.prototype.update = function() {
@@ -882,6 +896,7 @@ Soldier.prototype.update = function() {
         this.shoot();
     }
     this.move();
+    this.rotate();
 
     if(this.state === "shoot" && Math.random() <= this.toStateMove) {
         this.state = "move";
