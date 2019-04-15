@@ -877,8 +877,8 @@ Soldier.prototype.kill = function() {
 Soldier.prototype.shoot = function() {
     if(Math.random() <= this.shootFreq) {
         model.lasers.push(new Laser(
-            this.pos.x + Math.cos((this.dir + 28) * d2r) * 30,
-            this.pos.y + Math.sin((this.dir + 28) * d2r) * 30,
+            this.pos.x + Math.cos((this.dir + 23) * d2r) * 36,
+            this.pos.y + Math.sin((this.dir + 23) * d2r) * 36,
             this.dir
         ));
     }
