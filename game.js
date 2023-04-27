@@ -925,7 +925,7 @@ Laser = function(x, y, dir) {
 
     this.dir = dir;
 
-    this.defaultSpeed = 3;
+    this.defaultSpeed = 6;
     this.speed = this.defaultSpeed;
 
     this.used = false;
