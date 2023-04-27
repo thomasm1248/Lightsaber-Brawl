@@ -739,7 +739,7 @@ Soldier.prototype.draw = function() {
     ctx.translate(this.pos.x, this.pos.y);
     ctx.rotate(this.dir * d2r);
     
-    ctx.fillStyle = "#101010";
+    ctx.fillStyle = "#202020";
     ctx.fillRect(-17, 9, 50, 10);
     
     ctx.fillStyle = "#dddddd";
@@ -885,7 +885,7 @@ Soldier.prototype.shoot = function() {
 }
 
 Soldier.prototype.rotate = function() {
-    this.rot += Math.random() * 4 - 2;
+    this.rot += Math.random() * 2 - 1;
     this.rot *= 0.95;
     this.dir += this.rot;
     this.dir %= 360;
